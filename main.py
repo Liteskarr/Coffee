@@ -1,7 +1,7 @@
-import sys
 import sqlite3
-from typing import List
+import sys
 from dataclasses import dataclass
+from typing import List
 
 import PyQt5.uic as uic
 from PyQt5.QtWidgets import (QApplication,
