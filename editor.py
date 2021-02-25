@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import (QApplication,
                              QMessageBox,
                              QTableWidgetItem, QTableWidget)
 
+from addEditCoffeeForm import AddEditCoffeeForm
+
 
 deleting_coffee_request = """
 DELETE FROM coffee;
@@ -57,14 +59,11 @@ def get_table_data(table: QTableWidget) -> list:
     return result
 
 
-class EditorWidget(QWidget):
+class EditorWidget(QWidget, AddEditCoffeeForm):
     def __init__(self):
         super().__init__()
         self._current_row = None
-        self._configure_ui()
-
-    def _configure_ui(self):
-        uic.loadUi('addEditCoffeeForm.ui', self)
+        self.setupUi(self)
         self.load_button.clicked.connect(self._rise_db_dialog)
         self.add_button.clicked.connect(self._add_row)
         self.save_button.clicked.connect(self._save_db)

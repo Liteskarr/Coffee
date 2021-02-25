@@ -9,6 +9,8 @@ from PyQt5.QtWidgets import (QApplication,
                              QFileDialog,
                              QMessageBox, QTableWidgetItem)
 
+from mainForm import MainWidgetForm
+
 
 @dataclass
 class Coffee:
@@ -36,15 +38,12 @@ def get_all_records(connection: sqlite3.Connection) -> List[Coffee]:
     return list(data)
 
 
-class MainWidget(QWidget):
+class MainWidget(QWidget, MainWidgetForm):
     def __init__(self) -> None:
         super().__init__()
         self._data: List[Coffee] = []
         self._connection: sqlite3.Connection = None
-        self._configure_ui()
-
-    def _configure_ui(self) -> None:
-        uic.loadUi('main.ui', self)
+        self.setupUi(self)
         self.load_button.clicked.connect(self._rise_db_dialog)
 
     def _load_db(self) -> None:
